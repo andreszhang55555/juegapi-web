@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JuegAPI - Registro</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header>
+    <div class="banner">
+        <div class="logo">
+            <h1>JuegAPI</h1>
+            <p>Catálogo de Videojuegos con API</p>
+        </div>
+        <div class="busqueda">
+            <a href="https://www.google.com" target="_blank">🔍</a>
+        </div>
+        <div class="redes-sociales">
+            <a href="#">IG</a>
+            <a href="#">FB</a>
+            <a href="#">X</a>
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="cliente.html">Catálogo</a></li>
+            <li><a class="activo" href="registro.html">Registro</a></li>
+            <li><a href="admin.html">Admin</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section id="registro">
+        <h2>Registro de Usuario</h2>
+
+        <form id="registroForm">
+            <div class="campo-formulario">
+                <label for="nombre">Nombre completo:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="correo">Correo electrónico:</label>
+                <input type="email" id="correo" name="correo" required>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="confirmar">Confirmar contraseña:</label>
+                <input type="password" id="confirmar" name="confirmar" required>
+            </div>
+
+            <!-- Comentario: todos los registrados aquí serán clientes -->
+            <button type="submit">Registrarse</button>
+        </form>
+
+        <p id="registroMensaje" class="mensaje"></p>
+
+        <p>¿Ya tienes cuenta? <a href="index.html">Inicia sesión</a></p>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 JuegAPI - Proyecto Final Desarrollo de Software V</p>
+</footer>
+
+<script src="js/auth.js"></script>
+</body>
+</html>

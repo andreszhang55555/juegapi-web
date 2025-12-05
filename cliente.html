@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JuegAPI - Catálogo Cliente</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header>
+    <div class="banner">
+        <div class="logo">
+            <h1>JuegAPI</h1>
+            <p>Catálogo de Videojuegos con API</p>
+        </div>
+        <div class="busqueda">
+            <a href="https://www.google.com" target="_blank">🔍</a>
+        </div>
+        <div class="redes-sociales">
+            <a href="#">IG</a>
+            <a href="#">FB</a>
+            <a href="#">X</a>
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+            <li><a class="activo" href="cliente.html">Catálogo</a></li>
+            <li><a href="registro.html">Registro</a></li>
+            <li><a href="admin.html">Admin</a></li>
+            <li><button id="btnLogout" class="btn-logout">Cerrar sesión</button></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section id="catalogo">
+        <h2>Catálogo de Juegos</h2>
+
+        <!-- FILTROS (3 filtros: nombre, género, plataforma) -->
+        <div class="filtros">
+            <div class="campo-formulario">
+                <label for="filtroNombre">Nombre:</label>
+                <input type="text" id="filtroNombre" placeholder="Buscar por nombre">
+            </div>
+
+            <div class="campo-formulario">
+                <label for="filtroGenero">Género:</label>
+                <select id="filtroGenero">
+                    <option value="">Todos</option>
+                    <option value="RPG">RPG</option>
+                    <option value="Acción">Acción</option>
+                    <option value="Aventura">Aventura</option>
+                    <option value="Estrategia">Estrategia</option>
+                </select>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="filtroPlataforma">Plataforma:</label>
+                <select id="filtroPlataforma">
+                    <option value="">Todas</option>
+                    <option value="PC">PC</option>
+                    <option value="PlayStation">PlayStation</option>
+                    <option value="Xbox">Xbox</option>
+                    <option value="Nintendo">Nintendo</option>
+                </select>
+            </div>
+
+            <button id="btnAplicarFiltros">Aplicar filtros</button>
+        </div>
+
+        <!-- LISTA DE JUEGOS -->
+        <div id="listaJuegos" class="grid-juegos">
+            <!-- Se llena por JavaScript -->
+        </div>
+    </section>
+
+    <section id="favoritos">
+        <h2>Mis Favoritos</h2>
+        <div id="listaFavoritos" class="grid-juegos">
+            <!-- Se llena por JavaScript -->
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 JuegAPI - Proyecto Final Desarrollo de Software V</p>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/cliente.js"></script>
+</body>
+</html>

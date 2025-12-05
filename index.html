@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Proyecto Final: JuegAPI - Home / Login -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JuegAPI - Home</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- HEADER CON LOGO, BUSCADOR Y REDES SOCIALES -->
+    <header>
+        <div class="banner">
+            <div class="logo">
+                <h1>JuegAPI</h1>
+                <p>Catálogo de Videojuegos con API</p>
+            </div>
+
+            <!-- Icono de búsqueda que enlaza a Google -->
+            <div class="busqueda">
+                <a href="https://www.google.com" target="_blank" title="Buscar en Google">🔍</a>
+            </div>
+
+            <!-- Redes sociales -->
+            <div class="redes-sociales">
+                <a href="#" title="Instagram">IG</a>
+                <a href="#" title="Facebook">FB</a>
+                <a href="#" title="X/Twitter">X</a>
+            </div>
+        </div>
+
+        <!-- MENÚ -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+                <li><a href="cliente.html">Catálogo</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- NOTICIAS -->
+        <section id="noticias">
+            <h2>Noticias y novedades gamer</h2>
+
+            <article class="noticia">
+                <h3>Nuevo RPG de mundo abierto</h3>
+                <p>Un título con más de 100 horas de juego, decisiones morales y finales alternativos.</p>
+                <a href="#" target="_blank">Leer artículo completo</a>
+            </article>
+
+            <article class="noticia">
+                <h3>La IA mejora la experiencia en videojuegos</h3>
+                <p>La inteligencia artificial permite enemigos más inteligentes y recomendaciones personalizadas.</p>
+                <a href="#" target="_blank">Leer artículo completo</a>
+            </article>
+
+            <article class="noticia">
+                <h3>Video: Top 10 juegos más esperados</h3>
+                <p>Mira este resumen con los lanzamientos más esperados del año.</p>
+                <a href="#" target="_blank">Ver video</a>
+            </article>
+        </section>
+
+        <!-- LOGIN -->
+        <section id="login">
+            <h2>Iniciar sesión</h2>
+
+            <form id="loginForm">
+                <div class="campo-formulario">
+                    <label for="correo">Correo electrónico:</label>
+                    <input type="email" id="correo" name="correo" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="rol">Rol:</label>
+                    <select id="rol" name="rol" required>
+                        <option value="">Seleccione un rol</option>
+                        <option value="cliente">Cliente</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+
+                <button type="submit">Ingresar</button>
+            </form>
+
+            <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
+
+            <p id="loginMensaje" class="mensaje"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 JuegAPI - Proyecto Final Desarrollo de Software V</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

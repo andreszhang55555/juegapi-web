@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JuegAPI - Panel Admin</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header>
+    <div class="banner">
+        <div class="logo">
+            <h1>JuegAPI</h1>
+            <p>Panel de Administración</p>
+        </div>
+        <div class="busqueda">
+            <a href="https://www.google.com" target="_blank">🔍</a>
+        </div>
+        <div class="redes-sociales">
+            <a href="#">IG</a>
+            <a href="#">FB</a>
+            <a href="#">X</a>
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="cliente.html">Catálogo</a></li>
+            <li><a href="registro.html">Registro</a></li>
+            <li><a class="activo" href="admin.html">Admin</a></li>
+            <li><button id="btnLogout" class="btn-logout">Cerrar sesión</button></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <!-- GESTIÓN DE JUEGOS -->
+    <section id="admin-juegos">
+        <h2>Gestión de Juegos (ocultar de la búsqueda)</h2>
+        <div id="listaJuegosAdmin" class="grid-juegos">
+            <!-- Se llena por JS -->
+        </div>
+    </section>
+
+    <!-- LISTA DE CLIENTES -->
+    <section id="admin-clientes">
+        <h2>Lista de Clientes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                </tr>
+            </thead>
+            <tbody id="tablaClientes">
+                <!-- Se llena por JS -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- CALIFICACIONES DE JUEGOS -->
+    <section id="admin-calificaciones">
+        <h2>Calificaciones de los Juegos (dejadas por clientes)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Juego</th>
+                    <th>Cliente</th>
+                    <th>Calificación</th>
+                </tr>
+            </thead>
+            <tbody id="tablaCalificaciones">
+                <!-- Se llena por JS -->
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 JuegAPI - Proyecto Final Desarrollo de Software V</p>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
