@@ -8,57 +8,100 @@
 </head>
 <body>
 <header>
-    <div class="banner">
-        <div class="logo">
-            <h1>JuegAPI</h1>
-            <p>Catálogo de Videojuegos con API</p>
-        </div>
-        <div class="busqueda">
-            <a href="https://www.google.com" target="_blank">🔍</a>
-        </div>
-        <div class="redes-sociales">
-            <a href="#">IG</a>
-            <a href="#">FB</a>
-            <a href="#">X</a>
-        </div>
-    </div>
+    <!-- HEADER CON LOGO, BUSCADOR Y REDES SOCIALES -->
+    <header>
+        <div class="banner">
+            <div class="logo">
+                <h1>JuegApi</h1>
+                <p>Catálogo de Videojuegos con API</p>
+            </div>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a class="activo" href="sobre-nosotros.html">Sobre Nosotros</a></li>
-            <li><a href="cliente.html">Catálogo</a></li>
-            <li><a href="registro.html">Registro</a></li>
-            <li><a href="admin.html">Admin</a></li>
-        </ul>
-    </nav>
+            <div class="busqueda">
+                <form action="https://www.google.com/search" method="get" target="_blank" class="barra-busqueda">
+                    <input type="text" name="q" placeholder="Buscar juegos..." required>
+                    <button type="submit" title="Buscar">🔍</button>
+                </form>
+            </div>
+
+            <div class="auth-links">
+                <a href="#login" title="Iniciar Sesión">Iniciar Sesión</a>
+                <a href="registro.html" title="Registrarse" class="btn-registro">Registrarse</a>
+            </div>
+            <input type="checkbox" id="sidebar-toggle" hidden>
+
+            <label for="sidebar-toggle" class="menu-toggle" title="Abrir Menú">&#9776;</label>
+        </div>
+        <!-- MENÚ -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+                <li><a href="cliente.html">Catálogo</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
 </header>
 
 <main>
     <section id="sobre-nosotros">
-        <h2>Sobre Nosotros</h2>
-        <p>
-            Somos un equipo de estudiantes de Desarrollo de Software que ha creado JuegAPI,
-            una plataforma web para consultar juegos, marcarlos como favoritos y calificarlos.
-        </p>
-
-        <div class="integrantes">
-            <article class="integrante">
+    <h2>Sobre Nosotros</h2>
+    <div class="integrantes">
+        
+        <article class="integrante">
+            <div class="integrante-info">
                 <h3>Nombre del Integrante 1</h3>
                 <p>Rol: Desarrollador Frontend</p>
-            </article>
+            </div>
+            
+            <div class="integrante-foto" style="background-image: url('img/integrante1.jpg');">
+                [Foto]
+            </div>
+        </article>
 
-            <article class="integrante">
+        <article class="integrante">
+            <div class="integrante-info">
                 <h3>Nombre del Integrante 2</h3>
                 <p>Rol: Diseñador UI/UX</p>
-            </article>
+            </div>
+            <div class="integrante-foto" style="background-image: url('img/integrante2.jpg');">
+                [Foto]
+            </div>
+        </article>
 
-            <article class="integrante">
+        <article class="integrante">
+            <div class="integrante-info">
                 <h3>Nombre del Integrante 3</h3>
                 <p>Rol: Integración con API</p>
-            </article>
-        </div>
-    </section>
+            </div>
+            <div class="integrante-foto" style="background-image: url('img/integrante3.jpg');">
+                [Foto]
+            </div>
+        </article>
+
+        <article class="integrante">
+            <div class="integrante-info">
+                <h3>Nombre del Integrante 4</h3>
+                <p>Rol: Integración con API</p>
+            </div>
+            <div class="integrante-foto" style="background-image: url('img/integrante3.jpg');">
+                [Foto]
+            </div>
+        </article>
+
+        <article class="integrante">
+            <div class="integrante-info">
+                <h3>Nombre del Integrante 5</h3>
+                <p>Rol: Integración con API</p>
+            </div>
+            <div class="integrante-foto" style="background-image: url('img/integrante3.jpg');">
+                [Foto]
+            </div>
+        </article>
+        
+    </div>
+</section>
 </main>
 
 <footer>

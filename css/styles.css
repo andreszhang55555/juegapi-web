@@ -7,7 +7,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f3f3f3;
+    background-color: #a19f9f;
     color: #222;
 }
 
@@ -23,13 +23,20 @@ header {
     padding: 10px 20px;
 }
 
-.logo h1 {
-    font-size: 24px;
-    margin-bottom: 5px;
+/* Nuevo estilo para la imagen del logo */
+.logo-img {
+    /* Define la altura máxima que tendrá el logo */
+    height: 40px; 
+    /* Asegura que el ancho se ajuste proporcionalmente */
+    width: auto; 
+    display: block; /* Asegura que la imagen sea tratada como un bloque para un control total */
 }
 
-.logo p {
-    font-size: 14px;
+/* Puedes agregar un media query si quieres que sea más grande en escritorio */
+@media (min-width: 768px) {
+    .logo-img {
+        height: 50px;
+    }
 }
 
 .busqueda a {
@@ -48,8 +55,10 @@ header {
 /* Menú de navegación */
 nav {
     background-color: #333;
+    position: relative; /* Necesario para posicionar el botón toggle */
 }
 
+/* En Escritorio: La lista sigue siendo una barra horizontal */
 nav ul {
     display: flex;
     list-style: none;
@@ -213,6 +222,122 @@ th {
     background-color: #eee;
 }
 
+/* Hero Slider */
+#hero-slider {
+    position: relative;
+    overflow: hidden; /* Oculta las tarjetas que están fuera de vista */
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+#hero-slider h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 28px;
+    color: #007bff; /* Color principal */
+}
+
+.slider-container {
+    display: flex;
+    overflow-x: auto; /* Permite el desplazamiento horizontal con el mouse */
+    scroll-snap-type: x mandatory; /* Para que se detenga en cada tarjeta */
+    -webkit-overflow-scrolling: touch;
+    gap: 15px; /* Espacio entre las tarjetas */
+    padding-bottom: 10px; /* Espacio para la barra de desplazamiento si aparece */
+}
+
+.slider-card {
+    min-width: 100%; /* Cada tarjeta ocupa el 100% del contenedor para un solo slide */
+    scroll-snap-align: start;
+    height: 350px; /* Altura de la tarjeta */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+    position: relative;
+    color: #fff;
+    display: flex;
+    align-items: flex-end; /* Coloca la información en la parte inferior */
+    flex-shrink: 0; /* Evita que las tarjetas se encojan */
+    transition: transform 0.3s ease; /* Para futuras animaciones JS */
+}
+
+.card-info {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    width: 100%;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.card-info h3 {
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.card-info p {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.btn-slider {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-slider:hover {
+    background-color: #0056b3;
+}
+
+/* Controles de navegación del slider (Flechas) */
+.slider-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 20px;
+    border-radius: 50%;
+    line-height: 1; /* Para centrar el carácter de la flecha */
+}
+
+.slider-control.prev {
+    left: 30px;
+}
+
+.slider-control.next {
+    right: 30px;
+}
+
+.slider-control:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Media Query para tabletas y escritorios, mostrando 2 tarjetas a la vez */
+@media (min-width: 768px) {
+    .slider-card {
+        min-width: calc(50% - 7.5px); /* Muestra dos tarjetas con espacio */
+        height: 400px;
+    }
+}
+
+/* Media Query para escritorios grandes, mostrando 3 tarjetas a la vez */
+@media (min-width: 1024px) {
+    .slider-card {
+        min-width: calc(33.333% - 10px); /* Muestra tres tarjetas con espacio */
+    }
+}
+
 /* Footer */
 footer {
     margin-top: 30px;
@@ -220,4 +345,305 @@ footer {
     background-color: #222;
     color: #fff;
     text-align: center;
+}
+
+
+/* Estilos para la barra de búsqueda en el banner */
+.busqueda {
+    /* Asegura que ocupe espacio, especialmente en pantallas grandes */
+    flex-grow: 1; 
+    /* Centra la barra horizontalmente si hay espacio */
+    padding: 0 20px; 
+}
+
+.barra-busqueda {
+    display: flex;
+    padding: 5px 15px;
+    max-width: 400px; /* Limita el ancho en pantallas grandes */
+    margin: 0 auto; /* Centra la barra dentro de su contenedor (.busqueda) */
+    border-radius: 20px;
+    overflow: hidden; /* Para que el borde redondeado afecte a los elementos internos */
+    background-color: #fff; /* Fondo blanco para la barra */
+}
+
+.barra-busqueda input[type="text"] {
+    flex-grow: 1;
+    padding: 5px 15px;
+    border: none;
+    outline: none; /* Quita el borde azul al enfocar */
+    font-size: 16px;
+    color: #222;
+}
+
+.barra-busqueda button {
+    background-color: #606e7e00;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 0; /* Anula cualquier redondeo de botón general */
+    line-height: 1;
+}
+
+.barra-busqueda button:hover {
+    background-color: #0057b300;
+}
+
+/* Ajuste para pantallas más pequeñas donde queremos que la barra sea más compacta */
+@media (max-width: 600px) {
+    .banner {
+        /* Permite que los elementos se apilen o se ajusten mejor */
+        flex-wrap: wrap; 
+    }
+    .busqueda {
+        order: 3; /* Mueve la búsqueda abajo si es necesario */
+        flex-basis: 100%; /* Ocupa todo el ancho disponible */
+        margin-top: 10px; 
+        padding: 0 10px;
+    }
+    .barra-busqueda {
+        max-width: 100%;
+    }
+    .logo, .redes-sociales {
+        flex-basis: auto;
+    }
+}
+
+/* Estilos para los enlaces de Iniciar Sesión / Registrarse */
+.auth-links {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre los enlaces */
+    margin-left: 20px; /* Espacio a la izquierda de la barra de búsqueda */
+}
+
+.auth-links a {
+    color: #fff; /* Color de texto predeterminado para enlaces de autenticación */
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.auth-links a:hover {
+    background-color: #555;
+}
+
+/* Estilo especial para el botón de Registro */
+.auth-links .btn-registro {
+    font-weight: bold;
+    color: #fff;
+    padding: 8px 12px;
+}
+
+.auth-links .btn-registro:hover {
+    background-color: #0056b3;
+}
+
+/* Ajuste de Media Query para el nuevo bloque en pantallas pequeñas */
+@media (max-width: 600px) {
+    .auth-links {
+        order: 2; /* Coloca los enlaces de auth entre el logo y la barra de búsqueda */
+        margin-left: 0;
+    }
+    .logo {
+        flex-basis: 50%;
+    }
+}
+
+/* Botón Hamburguesa - Oculto por defecto en escritorio */
+.menu-toggle {
+    display: none; 
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    padding: 10px 20px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* Contenedor flexible para las tarjetas de noticias */
+.grid-noticias {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas salten a la siguiente fila */
+    gap: 20px; /* Espacio entre las tarjetas */
+    margin-top: 15px;
+    justify-content: flex-start; /* Alinea las tarjetas al inicio */
+}
+
+/* Modificación de la tarjeta de noticia */
+.noticia {
+    background-color: #fff;
+    padding: 0; /* Eliminamos el padding del contenedor principal para que la imagen llegue al borde */
+    margin-bottom: 0; /* Ya usamos gap en .grid-noticias */
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade una sombra sutil de tarjeta */
+    
+    /* Define el ancho de la tarjeta */
+    flex: 1 1 300px; /* Crece (1), no se encoge (1), base width 300px. */
+    max-width: calc(50% - 10px); /* Para pantallas medianas, dos columnas */
+    overflow: hidden; /* Asegura que la imagen respete el border-radius superior */
+}
+
+/* Área de imagen/video */
+.noticia-media {
+    width: 100%;
+    height: 180px; /* Altura fija para la miniatura */
+    background-color: #ddd; /* Color de placeholder */
+    background-image: url('placeholder-news.jpg'); /* Reemplazar con imagen real si es posible */
+    background-size: cover;
+    background-position: center;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+/* Contenido de texto y enlace */
+.noticia h3 {
+    padding: 10px 15px 0;
+    margin-bottom: 5px;
+}
+
+.noticia p {
+    padding: 0 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.noticia a {
+    display: block; /* Ocupa todo el ancho inferior */
+    padding: 10px 15px;
+    background-color: #f3f3f3;
+    color: #007bff;
+    text-align: right;
+    text-decoration: none;
+    font-weight: bold;
+    border-top: 1px solid #eee;
+}
+
+.noticia a:hover {
+    background-color: #e9e9e9;
+}
+
+
+/* Media Query para pantallas grandes: Tres columnas */
+@media (min-width: 1024px) {
+    .noticia {
+        /* Tres columnas con espacio */
+        max-width: calc(33.333% - 14px); 
+    }
+}
+
+/* Media Query para móviles: Una columna */
+@media (max-width: 767px) {
+    .noticia {
+        /* Una columna */
+        max-width: 100%; 
+    }
+}
+
+/* --- ESTILOS DE LA SECCIÓN 'SOBRE NOSOTROS' --- */
+
+#sobre-nosotros {
+    margin-bottom: 30px;
+}
+
+#sobre-nosotros h2 {
+    margin-bottom: 15px;
+}
+
+/* Contenedor principal de los integrantes */
+.integrantes {
+    display: flex;
+    flex-wrap: wrap; /* <-- Esto permite el salto de línea */
+    gap: 20px;
+    margin-top: 15px;
+}
+
+/* Estilo general para cada tarjeta de integrante */
+.integrante {
+    background-color: #fff;
+    padding: 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    /* CONTROL DE ANCHO: Se ajusta para 2 columnas en pantallas medianas */
+    /* Permite que la tarjeta crezca (1), se encoja (1), con una base de 300px. */
+    flex: 1 1 300px; 
+    max-width: calc(50% - 10px); /* Dos columnas (50%) menos la mitad del gap (10px) */
+    
+    overflow: hidden;
+    
+    display: flex; 
+    justify-content: space-between;
+    align-items: stretch; 
+}
+
+/* Contenedor del Texto (Nombre y Rol) - Columna Izquierda */
+.integrante-info {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente el texto */
+}
+
+.integrante h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #007bff;
+    font-size: 1.2em;
+}
+
+.integrante p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Contenedor de la Foto - Columna Derecha */
+.integrante-foto {
+    width: 120px; /* Ancho fijo para la foto */
+    min-height: 100%; /* Ocupa toda la altura disponible */
+    background-color: #ddd; /* Color de placeholder */
+    background-size: cover;
+    background-position: center;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    
+    /* Placeholder visual para la foto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-weight: bold;
+}
+
+
+/* --- RESPONSIVIDAD (Media Queries) --- */
+
+/* Escritorio (3+ columnas si hay espacio, o 2 columnas) */
+@media (min-width: 1024px) {
+    .integrante {
+        /* Tres columnas (33.333%) menos el espacio del gap */
+        max-width: calc(33.333% - 13.33px); 
+    }
+}
+
+/* Móviles (1 columna) */
+@media (max-width: 600px) {
+    .integrante {
+        flex-direction: column-reverse; /* Pone la foto arriba y el texto abajo */
+        max-width: 100%; /* Ocupa todo el ancho disponible */
+        width: 100%;
+    }
+    
+    .integrante-foto {
+        width: 100%; 
+        height: 150px; 
+        border-radius: 8px 8px 0 0; 
+    }
 }
