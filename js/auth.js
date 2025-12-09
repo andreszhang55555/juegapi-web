@@ -1,134 +1,201 @@
 // js/auth.js
-// Manejo de usuarios, login, registro y sesión usando localStorage
 
-document.addEventListener("DOMContentLoaded", () => {
-    inicializarAdminPorDefecto();
-    manejarFormulariosAuth();
-    configurarBotonLogout();
-});
+import { auth, db } from './firebase-init.js'; // <-- Importamos instancias de init
+import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    onAuthStateChanged, // <-- Importamos onAuthStateChanged para la UI
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import { 
+    collection, 
+    doc, 
+    setDoc, 
+    getDoc // <-- Importamos getDoc para el login
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js"; 
 
-// Crea un admin por defecto si no existe
-function inicializarAdminPorDefecto() {
-    let usuarios = apiObtenerUsuarios();
-    const existeAdmin = usuarios.some(u => u.rol === "admin");
 
-    if (!existeAdmin) {
-        usuarios.push({
-            nombre: "Administrador",
-            correo: "admin@juegapi.com",
-            password: "admin123",
-            rol: "admin"
+// 2. Referencias del DOM
+const registroForm = document.getElementById("registroForm");
+const registroMensaje = document.getElementById("registroMensaje");
+const authLinks = document.getElementById('auth-links');
+const userProfile = document.getElementById('user-profile');
+const usernameDisplay = document.getElementById('username-display');
+const logoutBtn = document.getElementById('logout-btn');
+const loginForm = document.getElementById("loginForm"); // <-- Referencia al formulario del login
+const loginMensaje = document.getElementById("loginMensaje"); // <-- Referencia al mensaje de error/éxito
+
+
+// --- FUNCIÓN DE REGISTRO (Corregida para usar handleRegistration) ---
+function handleRegistration(email, password, displayName, role) { // Añadir displayName
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+
+            // Opcional: Actualizar el nombre de usuario inmediatamente (requiere import 'updateProfile')
+            /* updateProfile(user, { displayName: displayName }); */ 
+            
+            // 1. Guardar el rol en Firestore
+            const userDocRef = doc(collection(db, "users"), user.uid);
+            
+            return setDoc(userDocRef, {
+                email: user.email,
+                role: role, 
+                displayName: displayName, // Guardamos el nombre en Firestore
+                createdAt: new Date()
+            });
+        })
+        .then(() => {
+            registroMensaje.textContent = "Registro exitoso. Redirigiendo...";
+            registroMensaje.style.color = "green";
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        })
+        .catch((error) => {
+            console.error("Error de registro:", error.message);
+            registroMensaje.textContent = `Error: ${error.message}`;
+            registroMensaje.style.color = "red";
         });
-        apiGuardarUsuarios(usuarios);
-    }
 }
 
-// Detecta si hay formularios de login / registro en la página
-function manejarFormulariosAuth() {
-    const loginForm = document.getElementById("loginForm");
-    const registroForm = document.getElementById("registroForm");
+// 3. Manejo del Evento Submit del Registro
+if (registroForm) {
+    registroForm.addEventListener("submit", function (event) {
+        event.preventDefault(); 
 
-    if (loginForm) {
-        loginForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            procesarLogin();
-        });
-    }
+        const correo = document.getElementById("correo").value;
+        const password = document.getElementById("password").value;
+        const rol = document.getElementById("rol").value; // Usar el campo del HTML
+        const displayName = document.getElementById("displayName").value;
 
-    if (registroForm) {
-        registroForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            procesarRegistro();
-        });
-    }
-}
+        // Validación simple de Contraseña (si aún la necesitas)
+        // if (password !== confirmarPassword) { /* ... */ }
 
-// Procesar login
-function procesarLogin() {
-    const correo = document.getElementById("correo").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const rol = document.getElementById("rol").value;
-    const mensaje = document.getElementById("loginMensaje");
-
-    const usuarios = apiObtenerUsuarios();
-    const encontrado = usuarios.find(u => u.correo === correo && u.password === password && u.rol === rol);
-
-    if (!encontrado) {
-        mensaje.textContent = "Credenciales incorrectas o rol no coincide.";
-        mensaje.style.color = "red";
-        return;
-    }
-
-    // Guardamos la sesión actual
-    localStorage.setItem("usuarioActual", JSON.stringify({
-        nombre: encontrado.nombre,
-        correo: encontrado.correo,
-        rol: encontrado.rol
-    }));
-
-    mensaje.textContent = "Inicio de sesión exitoso.";
-    mensaje.style.color = "green";
-
-    if (rol === "admin") {
-        window.location.href = "admin.html";
-    } else {
-        window.location.href = "cliente.html";
-    }
-}
-
-// Procesar registro (crea usuarios cliente)
-function procesarRegistro() {
-    const nombre = document.getElementById("nombre").value.trim();
-    const correo = document.getElementById("correo").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const confirmar = document.getElementById("confirmar").value.trim();
-    const mensaje = document.getElementById("registroMensaje");
-
-    if (password !== confirmar) {
-        mensaje.textContent = "Las contraseñas no coinciden.";
-        mensaje.style.color = "red";
-        return;
-    }
-
-    let usuarios = apiObtenerUsuarios();
-    const existe = usuarios.some(u => u.correo === correo);
-
-    if (existe) {
-        mensaje.textContent = "Ya existe un usuario con ese correo.";
-        mensaje.style.color = "red";
-        return;
-    }
-
-    usuarios.push({
-        nombre,
-        correo,
-        password,
-        rol: "cliente"
+        // Llamar a la función principal de registro con el rol
+        handleRegistration(correo, password, displayName, rol); 
     });
-
-    apiGuardarUsuarios(usuarios);
-
-    mensaje.textContent = "Registro exitoso. Ahora puedes iniciar sesión.";
-    mensaje.style.color = "green";
 }
 
-// Configurar botón de logout (si existe)
-function configurarBotonLogout() {
-    const btnLogout = document.getElementById("btnLogout");
-    if (btnLogout) {
-        btnLogout.addEventListener("click", () => {
-            localStorage.removeItem("usuarioActual");
-            window.location.href = "index.html";
+
+// --- LÓGICA DE LOGIN (Usando signInWithEmailAndPassword importado) ---
+
+// Función que maneja el envío del formulario de login
+// La función DEBE estar definida en auth.js (o donde se importe)
+function handleLogin(email, password, roleSeleccionado) {
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            
+            // 1. Consultar el rol del usuario en Firestore
+            const userDocRef = doc(db, "users", user.uid);
+            return getDoc(userDocRef);
+        })
+        .then((docSnapshot) => {
+            if (docSnapshot.exists()) {
+                const userRoleDB = docSnapshot.data().role;
+                
+                // 2. Comparar el rol de la DB con el rol seleccionado
+                if (userRoleDB === roleSeleccionado) {
+                    // Login exitoso
+                    localStorage.setItem('userRole', userRoleDB); 
+                    window.location.href = 'index.html'; 
+                    
+                } else {
+                    // El rol no coincide. Forzar cierre de sesión y error.
+                    auth.signOut();
+                    throw new Error("El rol seleccionado no coincide con su cuenta. Intente de nuevo con el rol correcto.");
+                }
+            } else {
+                // Usuario autenticado en Auth, pero sin datos de rol en Firestore.
+                auth.signOut(); 
+                throw new Error("Error: Datos de rol no encontrados en la base de datos.");
+            }
+        })
+        .catch((error) => {
+            console.error("Error de login:", error.code, error.message);
+            
+            let displayError = "Error al iniciar sesión. Verifique sus credenciales.";
+            if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                displayError = "Correo o contraseña incorrectos.";
+            } else if (error.message.includes("El rol seleccionado no coincide")) {
+                displayError = error.message;
+            }
+
+            // Mostrar el error en la interfaz de usuario
+            loginMensaje.textContent = displayError;
+            loginMensaje.style.color = "red";
         });
+}
+
+
+// --- LÓGICA DE SESIÓN Y UI ---
+
+// Función para actualizar la UI (updateUI es correcta)
+function updateUI(user) {
+    // ... (Tu función updateUI es correcta y usa onAuthStateChanged)
+    if (user) {
+        authLinks.classList.add('hidden');
+        userProfile.classList.remove('hidden');
+        // Usa displayName de Auth si se actualizó, sino de Firestore/Email
+        const userName = user.displayName || user.email.split('@')[0]; 
+        usernameDisplay.textContent = userName;
+        
+    } else {
+        userProfile.classList.add('hidden');
+        authLinks.classList.remove('hidden');
     }
 }
 
-// Verificar rol para páginas protegidas
-function verificarAcceso(rolRequerido) {
-    const usuarioActual = JSON.parse(localStorage.getItem("usuarioActual") || "null");
-    if (!usuarioActual || usuarioActual.rol !== rolRequerido) {
-        alert("No tienes permiso para acceder a esta página.");
-        window.location.href = "index.html";
-    }
-    return usuarioActual;
+// Configuración del Listener de Estado de Autenticación
+onAuthStateChanged(auth, updateUI); // <-- Usar onAuthStateChanged importado
+
+// Función para cerrar la sesión (handleLogout es correcta)
+function handleLogout() {
+    auth.signOut()
+        .then(() => {
+            alert("Sesión cerrada correctamente.");
+            window.location.href = 'index.html'; 
+        })
+        .catch((error) => {
+            console.error("Error al cerrar sesión:", error);
+        });
+}
+
+// Conectar el botón de logout
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        handleLogout();
+    });
+}
+
+// OTRAS FUNCIONES:
+// El manejo de los formularios de login (si tienes uno) debe llamar a handleLogin(email, password, rol).
+// js/auth.js (Continuación)
+
+// 3A. Manejo del Evento Submit del Login
+if (loginForm) {
+    loginForm.addEventListener("submit", function (event) {
+        event.preventDefault(); // Detener el envío por defecto del formulario
+
+        // Obtener los valores de los inputs del formulario de LOGIN
+        const correo = document.getElementById("login_correo").value;
+        const password = document.getElementById("login_password").value;
+        const rol = document.getElementById("login_rol").value;
+
+        // Limpiar mensajes anteriores
+        loginMensaje.textContent = "";
+
+        if (!correo || !password || !rol) {
+            loginMensaje.textContent = "Por favor, complete todos los campos y seleccione un rol.";
+            loginMensaje.style.color = "red";
+            return;
+        }
+
+        // Llamar a la función principal de Login
+        loginMensaje.textContent = "Iniciando sesión...";
+        loginMensaje.style.color = "blue";
+        
+        handleLogin(correo, password, rol);
+    });
 }

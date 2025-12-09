@@ -647,3 +647,72 @@ footer {
         border-radius: 8px 8px 0 0; 
     }
 }
+
+/* --- NUEVOS ESTILOS PARA EL PERFIL DE USUARIO --- */
+
+/* Clase para ocultar elementos con JavaScript */
+.hidden {
+    display: none !important;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espacio entre el nombre y las redes sociales */
+    margin-left: 20px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.user-greeting {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#username-display {
+    color: #ffd700; /* Color que destaca el nombre de usuario */
+}
+
+.btn-logout {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: normal;
+    padding: 3px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-logout:hover {
+    color: #fff;
+    background-color: #555;
+}
+
+/* --- ESTILOS DE REDES SOCIALES (Restaurados) --- */
+
+.redes-sociales {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.redes-sociales a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+    padding: 5px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.redes-sociales a:hover {
+    background-color: #007bff;
+    border-color: #007bff;
+}

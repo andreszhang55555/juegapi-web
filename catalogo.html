@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JuegAPI - Panel Admin</title>
+    <title>JuegAPI - Catálogo Cliente</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<!-- HEADER CON LOGO, BUSCADOR Y REDES SOCIALES -->
+    <!-- HEADER CON LOGO, BUSCADOR Y REDES SOCIALES -->
     <header>
       <div class="banner">
         <div class="logo">
@@ -33,7 +33,7 @@
         </div>
 
         <div id="auth-links" class="auth-links">
-          <a href="#login" title="Iniciar Sesión">Iniciar Sesión</a>
+          <a href="login.html" title="Iniciar Sesión">Iniciar Sesión</a>
           <a href="registro.html" title="Registrarse" class="btn-registro"
             >Registrarse</a
           >
@@ -70,47 +70,55 @@
         </ul>
       </nav>
     </header>
+<script type="module" src="js/auth.js" defer></script>
 
 <main>
-    <!-- GESTIÓN DE JUEGOS -->
-    <section id="admin-juegos">
-        <h2>Gestión de Juegos (ocultar de la búsqueda)</h2>
-        <div id="listaJuegosAdmin" class="grid-juegos">
-            <!-- Se llena por JS -->
+    <section id="catalogo">
+        <h2>Catálogo de Juegos</h2>
+
+        <!-- FILTROS (3 filtros: nombre, género, plataforma) -->
+        <div class="filtros">
+            <div class="campo-formulario">
+                <label for="filtroNombre">Nombre:</label>
+                <input type="text" id="filtroNombre" placeholder="Buscar por nombre">
+            </div>
+
+            <div class="campo-formulario">
+                <label for="filtroGenero">Género:</label>
+                <select id="filtroGenero">
+                    <option value="">Todos</option>
+                    <option value="RPG">RPG</option>
+                    <option value="Acción">Acción</option>
+                    <option value="Aventura">Aventura</option>
+                    <option value="Estrategia">Estrategia</option>
+                </select>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="filtroPlataforma">Plataforma:</label>
+                <select id="filtroPlataforma">
+                    <option value="">Todas</option>
+                    <option value="PC">PC</option>
+                    <option value="PlayStation">PlayStation</option>
+                    <option value="Xbox">Xbox</option>
+                    <option value="Nintendo">Nintendo</option>
+                </select>
+            </div>
+
+            <button id="btnAplicarFiltros">Aplicar filtros</button>
+        </div>
+
+        <!-- LISTA DE JUEGOS -->
+        <div id="listaJuegos" class="grid-juegos">
+            <!-- Se llena por JavaScript -->
         </div>
     </section>
 
-    <!-- LISTA DE CLIENTES -->
-    <section id="admin-clientes">
-        <h2>Lista de Clientes</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                </tr>
-            </thead>
-            <tbody id="tablaClientes">
-                <!-- Se llena por JS -->
-            </tbody>
-        </table>
-    </section>
-
-    <!-- CALIFICACIONES DE JUEGOS -->
-    <section id="admin-calificaciones">
-        <h2>Calificaciones de los Juegos (dejadas por clientes)</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Juego</th>
-                    <th>Cliente</th>
-                    <th>Calificación</th>
-                </tr>
-            </thead>
-            <tbody id="tablaCalificaciones">
-                <!-- Se llena por JS -->
-            </tbody>
-        </table>
+    <section id="favoritos">
+        <h2>Mis Favoritos</h2>
+        <div id="listaFavoritos" class="grid-juegos">
+            <!-- Se llena por JavaScript -->
+        </div>
     </section>
 </main>
 
@@ -120,18 +128,6 @@
 
 <script src="js/api.js"></script>
 <script src="js/auth.js"></script>
-<script src="js/admin.js"></script>
-
-
-
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-
-<script type="module" src="js/firebase-init.js"></script> 
-<script type="module" src="js/auth.js"></script>
-
-
-<script src="js/firebase-init.js"></script>
+<script src="js/cliente.js"></script>
 </body>
 </html>

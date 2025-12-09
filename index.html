@@ -1,167 +1,164 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
+  <head>
     <!-- Proyecto Final: JuegAPI - Home / Login -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JuegAPI - Home</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="module" src="js/auth.js" defer></script>
+  </head>
 
-<body>
+  <body>
     <!-- HEADER CON LOGO, BUSCADOR Y REDES SOCIALES -->
     <header>
-        <div class="banner">
-            <div class="logo">
-                <h1>JuegApi</h1>
-                <p>Catálogo de Videojuegos con API</p>
-            </div>
-
-            <div class="busqueda">
-                <form action="https://www.google.com/search" method="get" target="_blank" class="barra-busqueda">
-                    <input type="text" name="q" placeholder="Buscar juegos..." required>
-                    <button type="submit" title="Buscar">🔍</button>
-                </form>
-            </div>
-
-            <div class="auth-links">
-                <a href="#login" title="Iniciar Sesión">Iniciar Sesión</a>
-                <a href="registro.html" title="Registrarse" class="btn-registro">Registrarse</a>
-            </div>
-            <input type="checkbox" id="sidebar-toggle" hidden>
-
-            <label for="sidebar-toggle" class="menu-toggle" title="Abrir Menú">&#9776;</label>
+      <div class="banner">
+        <div class="logo">
+          <h1>JuegApi</h1>
+          <p>Catálogo de Videojuegos con API</p>
         </div>
-        <!-- MENÚ -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
-                <li><a href="cliente.html">Catálogo</a></li>
-                <li><a href="registro.html">Registro</a></li>
-                <li><a href="admin.html">Admin</a></li>
-            </ul>
-        </nav>
+
+        <div class="busqueda">
+          <form
+            action="https://www.google.com/search"
+            method="get"
+            target="_blank"
+            class="barra-busqueda"
+          >
+            <input
+              type="text"
+              name="q"
+              placeholder="Buscar juegos..."
+              required
+            />
+            <button type="submit" title="Buscar">🔍</button>
+          </form>
+        </div>
+
+        <div id="auth-links" class="auth-links">
+          <a href="login.html" title="Iniciar Sesión">Iniciar Sesión</a>
+          <a href="registro.html" title="Registrarse" class="btn-registro"
+            >Registrarse</a
+          >
+        </div>
+
+        <div id="user-profile" class="user-profile hidden">
+          <div class="user-greeting">
+            Hola, <span id="username-display">Usuario</span>!
+            <a href="#" id="logout-btn" title="Cerrar Sesión" class="btn-logout"
+              >Salir</a
+            >
+          </div>
+
+          <div class="redes-sociales">
+            <a href="#" title="Instagram">IG</a>
+            <a href="#" title="Facebook">FB</a>
+            <a href="#" title="X/Twitter">X</a>
+          </div>
+        </div>
+        <input type="checkbox" id="sidebar-toggle" hidden />
+
+        <label for="sidebar-toggle" class="menu-toggle" title="Abrir Menú"
+          >&#9776;</label
+        >
+      </div>
+      <!-- MENÚ -->
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="registro.html">Registro</a></li>
+          <li><a href="admin.html">Admin</a></li>
+        </ul>
+      </nav>
     </header>
 
     <main>
-        <!-- NOTICIAS -->
-        <section id="noticias">
-            <h2>Noticias y novedades gamer</h2>
+      <!-- NOTICIAS -->
+      <section id="noticias">
+        <h2>Noticias y novedades gamer</h2>
 
-            <div class="grid-noticias">
+        <div class="grid-noticias">
+          <article class="noticia">
+            <div class="noticia-media"></div>
+            <h3>Nuevo RPG de mundo abierto</h3>
+            <p>
+              Un título con más de 100 horas de juego, decisiones morales y
+              finales alternativos.
+            </p>
+            <a href="#" target="_blank">Leer artículo completo</a>
+          </article>
 
-                <article class="noticia">
-                    <div class="noticia-media">
-                    </div>
-                    <h3>Nuevo RPG de mundo abierto</h3>
-                    <p>Un título con más de 100 horas de juego, decisiones morales y finales alternativos.</p>
-                    <a href="#" target="_blank">Leer artículo completo</a>
-                </article>
+          <article class="noticia">
+            <div class="noticia-media"></div>
+            <h3>La IA mejora la experiencia en videojuegos</h3>
+            <p>
+              La inteligencia artificial permite enemigos más inteligentes y
+              recomendaciones personalizadas.
+            </p>
+            <a href="#" target="_blank">Leer artículo completo</a>
+          </article>
 
-                <article class="noticia">
-                    <div class="noticia-media">
-                    </div>
-                    <h3>La IA mejora la experiencia en videojuegos</h3>
-                    <p>La inteligencia artificial permite enemigos más inteligentes y recomendaciones personalizadas.
-                    </p>
-                    <a href="#" target="_blank">Leer artículo completo</a>
-                </article>
+          <article class="noticia">
+            <div class="noticia-media video-preview"></div>
+            <h3>Video: Top 10 juegos más esperados</h3>
+            <p>Mira este resumen con los lanzamientos más esperados del año.</p>
+            <a href="#" target="_blank">Ver video</a>
+          </article>
 
-                <article class="noticia">
-                    <div class="noticia-media video-preview">
-                    </div>
-                    <h3>Video: Top 10 juegos más esperados</h3>
-                    <p>Mira este resumen con los lanzamientos más esperados del año.</p>
-                    <a href="#" target="_blank">Ver video</a>
-                </article>
+          <article class="noticia">
+            <div class="noticia-media"></div>
+            <h3>La IA mejora la experiencia en videojuegos</h3>
+            <p>
+              La inteligencia artificial permite enemigos más inteligentes y
+              recomendaciones personalizadas.
+            </p>
+            <a href="#" target="_blank">Leer artículo completo</a>
+          </article>
 
-                <article class="noticia">
-                    <div class="noticia-media">
-                    </div>
-                    <h3>La IA mejora la experiencia en videojuegos</h3>
-                    <p>La inteligencia artificial permite enemigos más inteligentes y recomendaciones personalizadas.
-                    </p>
-                    <a href="#" target="_blank">Leer artículo completo</a>
-                </article>
+          <article class="noticia">
+            <div class="noticia-media"></div>
+            <h3>Nuevo RPG de mundo abierto</h3>
+            <p>
+              Un título con más de 100 horas de juego, decisiones morales y
+              finales alternativos.
+            </p>
+            <a href="#" target="_blank">Leer artículo completo</a>
+          </article>
 
-                <article class="noticia">
-                    <div class="noticia-media">
-                    </div>
-                    <h3>Nuevo RPG de mundo abierto</h3>
-                    <p>Un título con más de 100 horas de juego, decisiones morales y finales alternativos.</p>
-                    <a href="#" target="_blank">Leer artículo completo</a>
-                </article>
+          <article class="noticia">
+            <div class="noticia-media"></div>
+            <h3>La IA mejora la experiencia en videojuegos</h3>
+            <p>
+              La inteligencia artificial permite enemigos más inteligentes y
+              recomendaciones personalizadas.
+            </p>
+            <a href="#" target="_blank">Leer artículo completo</a>
+          </article>
 
-                <article class="noticia">
-                    <div class="noticia-media">
-                    </div>
-                    <h3>La IA mejora la experiencia en videojuegos</h3>
-                    <p>La inteligencia artificial permite enemigos más inteligentes y recomendaciones personalizadas.
-                    </p>
-                    <a href="#" target="_blank">Leer artículo completo</a>
-                </article>
+          <article class="noticia">
+            <div class="noticia-media video-preview"></div>
+            <h3>Video: Top 10 juegos más esperados</h3>
+            <p>Mira este resumen con los lanzamientos más esperados del año.</p>
+            <a href="#" target="_blank">Ver video</a>
+          </article>
 
-                <article class="noticia">
-                    <div class="noticia-media video-preview">
-                    </div>
-                    <h3>Video: Top 10 juegos más esperados</h3>
-                    <p>Mira este resumen con los lanzamientos más esperados del año.</p>
-                    <a href="#" target="_blank">Ver video</a>
-                </article>
-
-                <article class="noticia">
-                    <div class="noticia-media">
-                    </div>
-                    <h3>La IA mejora la experiencia en videojuegos</h3>
-                    <p>La inteligencia artificial permite enemigos más inteligentes y recomendaciones personalizadas.
-                    </p>
-                    <a href="#" target="_blank">Leer artículo completo</a>
-                </article>
-            </div>
-        </section>
-
-        <!-- LOGIN -->
-        <section id="login">
-            <h2>Iniciar sesión</h2>
-
-            <form id="loginForm">
-                <div class="campo-formulario">
-                    <label for="correo">Correo electrónico:</label>
-                    <input type="email" id="correo" name="correo" required>
-                </div>
-
-                <div class="campo-formulario">
-                    <label for="password">Contraseña:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-
-                <div class="campo-formulario">
-                    <label for="rol">Rol:</label>
-                    <select id="rol" name="rol" required>
-                        <option value="">Seleccione un rol</option>
-                        <option value="cliente">Cliente</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
-
-                <button type="submit">Ingresar</button>
-            </form>
-
-            <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
-
-            <p id="loginMensaje" class="mensaje"></p>
-        </section>
+          <article class="noticia">
+            <div class="noticia-media"></div>
+            <h3>La IA mejora la experiencia en videojuegos</h3>
+            <p>
+              La inteligencia artificial permite enemigos más inteligentes y
+              recomendaciones personalizadas.
+            </p>
+            <a href="#" target="_blank">Leer artículo completo</a>
+          </article>
+        </div>
+      </section>
     </main>
-
-
-
+<script type="module" src="js/noticias.js"></script>
     <footer>
-        <p>&copy; 2025 JuegAPI - Proyecto Final Desarrollo de Software V</p>
+      <p>&copy; 2025 JuegAPI - Proyecto Final Desarrollo de Software V</p>
     </footer>
-
-    <script src="js/auth.js"></script>
-</body>
-
+  </body>
 </html>
