@@ -18,28 +18,22 @@
           <p>Catálogo de Videojuegos con API</p>
         </div>
 
-        <div class="busqueda">
-          <form
-            action="https://www.google.com/search"
-            method="get"
-            target="_blank"
-            class="barra-busqueda"
-          >
-            <input
-              type="text"
-              name="q"
-              placeholder="Buscar juegos..."
-              required
-            />
-            <button type="submit" title="Buscar">🔍</button>
-          </form>
-        </div>
+<div class="busqueda">
+  <form id="searchForm" class="barra-busqueda">
+    <input
+      type="search"
+      id="searchInput"
+      placeholder="Buscar en esta página..."
+    />
+    <button type="submit" title="Buscar">🔍</button>
+  </form>
+  <!-- Mensaje opcional de resultados -->
+  <p id="searchInfo" class="mensaje-busqueda"></p>
+</div>
+
 
         <div id="auth-links" class="auth-links">
           <a href="login.html" title="Iniciar Sesión">Iniciar Sesión</a>
-          <a href="registro.html" title="Registrarse" class="btn-registro"
-            >Registrarse</a
-          >
         </div>
 
         <div id="user-profile" class="user-profile hidden">
@@ -67,7 +61,6 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
           <li><a href="catalogo.html">Catálogo</a></li>
-          <li><a href="registro.html">Registro</a></li>
           <li><a href="admin.html">Admin</a></li>
         </ul>
       </nav>
@@ -79,7 +72,7 @@
         <h2>Noticias y novedades gamer</h2>
 
         <div class="grid-noticias">
-          <article class="noticia">
+<article class="noticia" data-buscable="true">
             <div class="noticia-media"></div>
             <h3>Nuevo RPG de mundo abierto</h3>
             <p>
@@ -89,7 +82,7 @@
             <a href="#" target="_blank">Leer artículo completo</a>
           </article>
 
-          <article class="noticia">
+<article class="noticia" data-buscable="true">
             <div class="noticia-media"></div>
             <h3>La IA mejora la experiencia en videojuegos</h3>
             <p>
@@ -99,65 +92,20 @@
             <a href="#" target="_blank">Leer artículo completo</a>
           </article>
 
-          <article class="noticia">
+<article class="noticia" data-buscable="true">
             <div class="noticia-media video-preview"></div>
             <h3>Video: Top 10 juegos más esperados</h3>
             <p>Mira este resumen con los lanzamientos más esperados del año.</p>
             <a href="#" target="_blank">Ver video</a>
-          </article>
-
-          <article class="noticia">
-            <div class="noticia-media"></div>
-            <h3>La IA mejora la experiencia en videojuegos</h3>
-            <p>
-              La inteligencia artificial permite enemigos más inteligentes y
-              recomendaciones personalizadas.
-            </p>
-            <a href="#" target="_blank">Leer artículo completo</a>
-          </article>
-
-          <article class="noticia">
-            <div class="noticia-media"></div>
-            <h3>Nuevo RPG de mundo abierto</h3>
-            <p>
-              Un título con más de 100 horas de juego, decisiones morales y
-              finales alternativos.
-            </p>
-            <a href="#" target="_blank">Leer artículo completo</a>
-          </article>
-
-          <article class="noticia">
-            <div class="noticia-media"></div>
-            <h3>La IA mejora la experiencia en videojuegos</h3>
-            <p>
-              La inteligencia artificial permite enemigos más inteligentes y
-              recomendaciones personalizadas.
-            </p>
-            <a href="#" target="_blank">Leer artículo completo</a>
-          </article>
-
-          <article class="noticia">
-            <div class="noticia-media video-preview"></div>
-            <h3>Video: Top 10 juegos más esperados</h3>
-            <p>Mira este resumen con los lanzamientos más esperados del año.</p>
-            <a href="#" target="_blank">Ver video</a>
-          </article>
-
-          <article class="noticia">
-            <div class="noticia-media"></div>
-            <h3>La IA mejora la experiencia en videojuegos</h3>
-            <p>
-              La inteligencia artificial permite enemigos más inteligentes y
-              recomendaciones personalizadas.
-            </p>
-            <a href="#" target="_blank">Leer artículo completo</a>
           </article>
         </div>
       </section>
     </main>
-<script type="module" src="js/noticias.js"></script>
+    <script src="js/busqueda.js"></script>
+    <script type="module" src="js/noticias.js"></script>
     <footer>
       <p>&copy; 2025 JuegAPI - Proyecto Final Desarrollo de Software V</p>
     </footer>
   </body>
 </html>
+

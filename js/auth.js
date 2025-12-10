@@ -17,12 +17,21 @@ import {
 // 2. Referencias del DOM
 const registroForm = document.getElementById("registroForm");
 const registroMensaje = document.getElementById("registroMensaje");
-const authLinks = document.getElementById('auth-links');
-const userProfile = document.getElementById('user-profile');
-const usernameDisplay = document.getElementById('username-display');
-const logoutBtn = document.getElementById('logout-btn');
-const loginForm = document.getElementById("loginForm"); // <-- Referencia al formulario del login
-const loginMensaje = document.getElementById("loginMensaje"); // <-- Referencia al mensaje de error/éxito
+const authLinks = document.getElementById("auth-links");
+const userProfile = document.getElementById("user-profile");
+const usernameDisplay = document.getElementById("username-display");
+const logoutBtn = document.getElementById("logout-btn");
+const loginForm = document.getElementById("loginForm");
+const loginMensaje = document.getElementById("loginMensaje");
+
+// --- NUEVO: estado de sesión y enlaces del menú ---
+let currentUser = null;
+
+// Enlaces del menú (si existen en la página actual)
+const linkAdmin = document.querySelector('a[href="admin.html"]');
+const linkCatalogo = document.querySelector('a[href="catalogo.html"]');
+
+
 
 
 // --- FUNCIÓN DE REGISTRO (Corregida para usar handleRegistration) ---
@@ -130,24 +139,80 @@ function handleLogin(email, password, roleSeleccionado) {
 
 // --- LÓGICA DE SESIÓN Y UI ---
 
-// Función para actualizar la UI (updateUI es correcta)
 function updateUI(user) {
-    // ... (Tu función updateUI es correcta y usa onAuthStateChanged)
-    if (user) {
-        authLinks.classList.add('hidden');
-        userProfile.classList.remove('hidden');
-        // Usa displayName de Auth si se actualizó, sino de Firestore/Email
-        const userName = user.displayName || user.email.split('@')[0]; 
-        usernameDisplay.textContent = userName;
-        
-    } else {
-        userProfile.classList.add('hidden');
-        authLinks.classList.remove('hidden');
+  if (user) {
+    // Usuario autenticado: ocultar enlaces de login/registro y mostrar perfil
+    if (authLinks) {
+      authLinks.classList.add("hidden");
     }
+    if (userProfile) {
+      userProfile.classList.remove("hidden");
+    }
+
+    let userName = user.email.split("@")[0];
+    if (user.displayName && user.displayName.trim() !== "") {
+      userName = user.displayName;
+    }
+
+    if (usernameDisplay) {
+      usernameDisplay.textContent = userName;
+    }
+
+    const role = localStorage.getItem("userRole");
+
+    // Mostrar u ocultar el enlace de Admin según el rol
+    if (linkAdmin) {
+      const liAdmin = linkAdmin.closest("li");
+      if (role === "admin") {
+        if (liAdmin) liAdmin.classList.remove("hidden");
+      } else {
+        if (liAdmin) liAdmin.classList.add("hidden");
+      }
+    }
+  } else {
+    // Invitado: no hay usuario autenticado
+    if (userProfile) {
+      userProfile.classList.add("hidden");
+    }
+    if (authLinks) {
+      authLinks.classList.remove("hidden");
+    }
+
+    // Para invitados, ocultamos siempre el enlace de Admin
+    if (linkAdmin) {
+      const liAdmin = linkAdmin.closest("li");
+      if (liAdmin) liAdmin.classList.add("hidden");
+    }
+  }
 }
 
-// Configuración del Listener de Estado de Autenticación
-onAuthStateChanged(auth, updateUI); // <-- Usar onAuthStateChanged importado
+// Proteger rutas según autenticación y rol
+function protegerRutas(user) {
+  const path = window.location.pathname;
+  const esCatalogo = path.endsWith("catalogo.html");
+  const esAdmin = path.endsWith("admin.html");
+  const role = localStorage.getItem("userRole");
+
+  // Invitado intentando entrar directamente al catálogo por URL
+  if (!user && esCatalogo) {
+    alert("Para acceder al catálogo debes iniciar sesión.");
+    window.location.href = "login.html";
+    return;
+  }
+
+  // Usuario autenticado sin rol admin intentando entrar a admin
+  if (user && esAdmin && role !== "admin") {
+    alert("Solo los administradores pueden acceder a esta sección.");
+    window.location.href = "index.html";
+  }
+}
+
+// Listener global de cambios de sesión
+onAuthStateChanged(auth, (user) => {
+  currentUser = user || null;     // <- aquí se rellena currentUser
+  updateUI(user);
+  protegerRutas(user);
+});
 
 // Función para cerrar la sesión (handleLogout es correcta)
 function handleLogout() {

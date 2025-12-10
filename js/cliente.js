@@ -57,6 +57,7 @@ function renderizarJuegos() {
     filtrados.forEach(juego => {
         const card = document.createElement("div");
         card.className = "card-juego";
+        card.setAttribute("data-buscable", "true");
 
         // Calificación promedio
         const califsJuego = calificaciones.filter(c => c.idJuego === juego.id);
